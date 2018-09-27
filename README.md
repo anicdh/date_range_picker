@@ -8,9 +8,9 @@ Flutter date range pickers use a dialog window to select a range of date on mobi
 
 ## Getting Started
 
-### Install
+### Installation
 
-Add to pubspec.yaml in `dependencies` 
+Add to `pubspec.yaml` in `dependencies` 
 
 ```
   date_range_picker:
@@ -18,13 +18,10 @@ Add to pubspec.yaml in `dependencies`
       url: git://github.com/anicdh/date_range_picker.git
 ```
 
-### Import
+### Usage
 ```
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
-```
-
-### Use
-```
+...
 new MaterialButton(
     color: Colors.deepOrangeAccent,
     onPressed: () async {
