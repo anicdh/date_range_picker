@@ -581,8 +581,12 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
   void initState() {
     super.initState();
     // Initially display the pre-selected date.
-    final int monthPage = _monthDelta(widget.firstDate, widget.selectedFirstDate);
-    // TODO add last date
+    int monthPage;
+    if (widget.selectedLastDate == null) {
+      _monthDelta(widget.firstDate, widget.selectedFirstDate);
+    } else {
+      _monthDelta(widget.selectedLastDate, widget.lastDate);
+    }
     _dayPickerController = new PageController(initialPage: monthPage);
     _handleMonthPageChanged(monthPage);
     _updateCurrentDate();
@@ -602,10 +606,12 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
   @override
   void didUpdateWidget(MonthPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.selectedFirstDate != oldWidget.selectedFirstDate) {
-      // TODO add last date
+    if (widget.selectedLastDate == null && widget.selectedFirstDate != oldWidget.selectedFirstDate) {
       final int monthPage = _monthDelta(widget.firstDate, widget.selectedFirstDate);
-      // TODO add last date
+      _dayPickerController = new PageController(initialPage: monthPage);
+      _handleMonthPageChanged(monthPage);
+    } else if (oldWidget.selectedLastDate == null || widget.selectedLastDate != oldWidget.selectedLastDate) {
+      final int monthPage = _monthDelta(widget.selectedLastDate, widget.lastDate);
       _dayPickerController = new PageController(initialPage: monthPage);
       _handleMonthPageChanged(monthPage);
     }
@@ -722,8 +728,7 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
                   return false;
                 },
                 child: new PageView.builder(
-                  key: new ValueKey<DateTime>(widget.selectedFirstDate),
-                  // TODO add last date
+                  key: new ValueKey<DateTime>(widget.selectedFirstDate == null ? widget.selectedFirstDate : widget.selectedLastDate),
                   controller: _dayPickerController,
                   scrollDirection: Axis.horizontal,
                   itemCount: _monthDelta(widget.firstDate, widget.lastDate) + 1,
@@ -843,11 +848,16 @@ class _YearPickerState extends State<YearPicker> {
   @override
   void initState() {
     super.initState();
+    int offset;
+    if (widget.selectedLastDate == null) {
+      offset = widget.lastDate.year - widget.selectedLastDate.year;
+    } else {
+      offset = widget.selectedFirstDate.year - widget.firstDate.year;
+    }
     scrollController = new ScrollController(
       // Move the initial scroll position to the currently selected date's year.
-      initialScrollOffset: (widget.selectedFirstDate.year - widget.firstDate.year) * _itemExtent,
+      initialScrollOffset: offset * _itemExtent,
     );
-    // TODO add last date
   }
 
   @override
@@ -986,7 +996,6 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       _mode = DatePickerMode.day;
       _selectedFirstDate = changes[0];
       _selectedLastDate = changes[1];
-      // TODO add last date
     });
   }
 
