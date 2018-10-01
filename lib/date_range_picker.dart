@@ -585,7 +585,7 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
     if (widget.selectedLastDate == null) {
       monthPage = _monthDelta(widget.firstDate, widget.selectedFirstDate);
     } else {
-      monthPage = _monthDelta(widget.selectedLastDate, widget.lastDate);
+      monthPage = _monthDelta(widget.firstDate, widget.selectedLastDate);
     }
     _dayPickerController = new PageController(initialPage: monthPage);
     _handleMonthPageChanged(monthPage);
@@ -611,7 +611,7 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
       _dayPickerController = new PageController(initialPage: monthPage);
       _handleMonthPageChanged(monthPage);
     } else if (oldWidget.selectedLastDate == null || widget.selectedLastDate != oldWidget.selectedLastDate) {
-      final int monthPage = _monthDelta(widget.selectedLastDate, widget.lastDate);
+      final int monthPage = _monthDelta(widget.firstDate, widget.selectedLastDate);
       _dayPickerController = new PageController(initialPage: monthPage);
       _handleMonthPageChanged(monthPage);
     }
