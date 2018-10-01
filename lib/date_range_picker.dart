@@ -583,9 +583,9 @@ class _MonthPickerState extends State<MonthPicker> with SingleTickerProviderStat
     // Initially display the pre-selected date.
     int monthPage;
     if (widget.selectedLastDate == null) {
-      _monthDelta(widget.firstDate, widget.selectedFirstDate);
+      monthPage = _monthDelta(widget.firstDate, widget.selectedFirstDate);
     } else {
-      _monthDelta(widget.selectedLastDate, widget.lastDate);
+      monthPage = _monthDelta(widget.selectedLastDate, widget.lastDate);
     }
     _dayPickerController = new PageController(initialPage: monthPage);
     _handleMonthPageChanged(monthPage);
