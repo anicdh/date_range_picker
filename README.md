@@ -1,6 +1,6 @@
 <a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes">
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square"/>
-</a>
+</a> <a href="https://pub.dartlang.org/packages/date_range_picker"><img alt="pub version" src="https://img.shields.io/pub/v/date_range_picker.svg?style=flat-square"></a>
 
 # Date Range Picker
 
@@ -17,7 +17,7 @@ Flutter date range pickers use a dialog window to select a range of date on mobi
 Add to `pubspec.yaml` in `dependencies` 
 
 ```
-  date_range_picker: ^1.0.0
+  date_range_picker: ^1.0.1
 ```
 
 ### Usage
