@@ -1,4 +1,8 @@
-# date_range_picker
+<a href="https://stackoverflow.com/questions/tagged/flutter?sort=votes">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square"/>
+</a>
+
+# Date Range Picker
 
 Flutter date range pickers use a dialog window to select a range of date on mobile.
 
