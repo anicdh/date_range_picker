@@ -1,6 +1,6 @@
 name: date_range_picker
 description: Date Range Pickers use a dialog window to select a range of date on mobile.
-version: 1.0.0
+version: 1.0.2
 author: anicdh <anic.dh@gmail.com>
 homepage: https://github.com/anicdh/date_range_picker
 
