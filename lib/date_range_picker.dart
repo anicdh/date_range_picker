@@ -654,8 +654,7 @@ class _MonthPickerState extends State<MonthPicker>
   @override
   void didUpdateWidget(MonthPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.selectedLastDate == null &&
-        widget.selectedFirstDate != oldWidget.selectedFirstDate) {
+    if (widget.selectedLastDate == null) {
       final int monthPage =
           _monthDelta(widget.firstDate, widget.selectedFirstDate);
       _dayPickerController = new PageController(initialPage: monthPage);
@@ -919,7 +918,7 @@ class _YearPickerState extends State<YearPicker> {
   void initState() {
     super.initState();
     int offset;
-    if (widget.selectedLastDate == null) {
+    if (widget.selectedLastDate != null) {
       offset = widget.lastDate.year - widget.selectedLastDate.year;
     } else {
       offset = widget.selectedFirstDate.year - widget.firstDate.year;
