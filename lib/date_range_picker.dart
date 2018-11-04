@@ -155,12 +155,14 @@ class _DatePickerHeader extends StatelessWidget {
       );
     }
     final Widget startHeader = new Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         renderYearButton(selectedFirstDate),
         renderDayButton(selectedFirstDate),
       ],
     );
     final Widget endHeader = selectedLastDate != null ? new Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         renderYearButton(selectedLastDate),
         renderDayButton(selectedLastDate),
@@ -174,8 +176,10 @@ class _DatePickerHeader extends StatelessWidget {
       padding: padding,
       color: backgroundColor,
       child: orientation == Orientation.portrait ? new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: children,
       ) : new Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: children,
       ),
     );
