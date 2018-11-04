@@ -32,7 +32,7 @@ enum DatePickerMode {
   year,
 }
 
-const double _kDatePickerHeaderPortraitHeight = 100.0;
+const double _kDatePickerHeaderPortraitHeight = 68.0;
 const double _kDatePickerHeaderLandscapeWidth = 168.0;
 
 const Duration _kMonthScrollDuration = Duration(milliseconds: 200);
@@ -112,10 +112,12 @@ class _DatePickerHeader extends StatelessWidget {
     EdgeInsets padding;
     switch (orientation) {
       case Orientation.portrait:
+        width = _kMonthPickerPortraitWidth;
         height = _kDatePickerHeaderPortraitHeight;
-        padding = const EdgeInsets.symmetric(horizontal: 16.0);
+        padding = const EdgeInsets.symmetric(horizontal: 8.0);
         break;
       case Orientation.landscape:
+        height = _kDatePickerLandscapeHeight;
         width = _kDatePickerHeaderLandscapeWidth;
         padding = const EdgeInsets.all(8.0);
         break;
@@ -127,11 +129,11 @@ class _DatePickerHeader extends StatelessWidget {
         child: new _DateHeaderButton(
           color: backgroundColor,
           onTap: Feedback.wrapForTap(
-                  () => _handleChangeMode(DatePickerMode.year), context),
+              () => _handleChangeMode(DatePickerMode.year), context),
           child: new Semantics(
               selected: mode == DatePickerMode.year,
-              child: new Text(localizations.formatYear(date),
-                  style: yearStyle)),
+              child:
+                  new Text(localizations.formatYear(date), style: yearStyle)),
         ),
       );
     }
@@ -143,7 +145,7 @@ class _DatePickerHeader extends StatelessWidget {
         child: new _DateHeaderButton(
           color: backgroundColor,
           onTap: Feedback.wrapForTap(
-                  () => _handleChangeMode(DatePickerMode.day), context),
+              () => _handleChangeMode(DatePickerMode.day), context),
           child: new Semantics(
               selected: mode == DatePickerMode.day,
               child: new Text(
@@ -154,6 +156,7 @@ class _DatePickerHeader extends StatelessWidget {
         ),
       );
     }
+
     final Widget startHeader = new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -161,25 +164,38 @@ class _DatePickerHeader extends StatelessWidget {
         renderDayButton(selectedFirstDate),
       ],
     );
-    final Widget endHeader = selectedLastDate != null ? new Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        renderYearButton(selectedLastDate),
-        renderDayButton(selectedLastDate),
-      ],
-    ) : new Container();
+    final Widget endHeader = selectedLastDate != null
+        ? new Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              renderYearButton(selectedLastDate),
+              renderDayButton(selectedLastDate),
+            ],
+          )
+        : new Container();
 
-    final children = [startHeader, endHeader];
     return new Container(
       width: width,
       height: height,
       padding: padding,
       color: backgroundColor,
-      child: orientation == Orientation.portrait ? new Row(
-        children: children,
-      ) : new Column(
-        children: children,
-      ),
+      child: orientation == Orientation.portrait
+          ? new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [startHeader, endHeader],
+            )
+          : new Column(
+              children: [
+                new Container(
+                  width: width,
+                  child: startHeader,
+                ),
+                new Container(
+                  width: width,
+                  child: endHeader,
+                ),
+              ],
+            ),
     );
   }
 }
