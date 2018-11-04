@@ -176,10 +176,8 @@ class _DatePickerHeader extends StatelessWidget {
       padding: padding,
       color: backgroundColor,
       child: orientation == Orientation.portrait ? new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: children,
       ) : new Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: children,
       ),
     );
