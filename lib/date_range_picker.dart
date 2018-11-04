@@ -110,81 +110,73 @@ class _DatePickerHeader extends StatelessWidget {
     double width;
     double height;
     EdgeInsets padding;
-    MainAxisAlignment mainAxisAlignment;
     switch (orientation) {
       case Orientation.portrait:
         height = _kDatePickerHeaderPortraitHeight;
         padding = const EdgeInsets.symmetric(horizontal: 16.0);
-        mainAxisAlignment = MainAxisAlignment.center;
         break;
       case Orientation.landscape:
         width = _kDatePickerHeaderLandscapeWidth;
         padding = const EdgeInsets.all(8.0);
-        mainAxisAlignment = MainAxisAlignment.start;
         break;
     }
+    Widget renderYearButton(date) {
+      return new IgnorePointer(
+        ignoring: mode != DatePickerMode.day,
+        ignoringSemantics: false,
+        child: new _DateHeaderButton(
+          color: backgroundColor,
+          onTap: Feedback.wrapForTap(
+                  () => _handleChangeMode(DatePickerMode.year), context),
+          child: new Semantics(
+              selected: mode == DatePickerMode.year,
+              child: new Text(localizations.formatYear(date),
+                  style: yearStyle)),
+        ),
+      );
+    }
 
-    final Widget yearButton = new IgnorePointer(
-      ignoring: mode != DatePickerMode.day,
-      ignoringSemantics: false,
-      child: new _DateHeaderButton(
-        color: backgroundColor,
-        onTap: Feedback.wrapForTap(
-            () => _handleChangeMode(DatePickerMode.year), context),
-        child: new Semantics(
-            selected: mode == DatePickerMode.year,
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(localizations.formatYear(selectedFirstDate),
-                    style: yearStyle),
-                selectedLastDate != null
-                    ? new Text(localizations.formatYear(selectedLastDate),
-                        style: yearStyle)
-                    : new Container(),
-              ],
-            )),
-      ),
+    Widget renderDayButton(date) {
+      return new IgnorePointer(
+        ignoring: mode == DatePickerMode.day,
+        ignoringSemantics: false,
+        child: new _DateHeaderButton(
+          color: backgroundColor,
+          onTap: Feedback.wrapForTap(
+                  () => _handleChangeMode(DatePickerMode.day), context),
+          child: new Semantics(
+              selected: mode == DatePickerMode.day,
+              child: new Text(
+                localizations.formatMediumDate(date),
+                style: dayStyle,
+                textScaleFactor: 0.5,
+              )),
+        ),
+      );
+    }
+    final Widget startHeader = new Column(
+      children: <Widget>[
+        renderYearButton(selectedFirstDate),
+        renderDayButton(selectedFirstDate),
+      ],
     );
+    final Widget endHeader = selectedLastDate != null ? new Column(
+      children: <Widget>[
+        renderYearButton(selectedLastDate),
+        renderDayButton(selectedLastDate),
+      ],
+    ) : new Container();
 
-    final Widget dayButton = new IgnorePointer(
-      ignoring: mode == DatePickerMode.day,
-      ignoringSemantics: false,
-      child: new _DateHeaderButton(
-        color: backgroundColor,
-        onTap: Feedback.wrapForTap(
-            () => _handleChangeMode(DatePickerMode.day), context),
-        child: new Semantics(
-            selected: mode == DatePickerMode.day,
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(
-                  localizations.formatMediumDate(selectedFirstDate),
-                  style: dayStyle,
-                  textScaleFactor: 0.6,
-                ),
-                selectedLastDate != null
-                    ? new Text(
-                        localizations.formatMediumDate(selectedLastDate),
-                        style: dayStyle,
-                        textScaleFactor: 0.6,
-                      )
-                    : new Container(),
-              ],
-            )),
-      ),
-    );
-
+    final children = [startHeader, endHeader];
     return new Container(
       width: width,
       height: height,
       padding: padding,
       color: backgroundColor,
-      child: new Column(
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[yearButton, dayButton],
+      child: orientation == Orientation.portrait ? new Row(
+        children: children,
+      ) : new Column(
+        children: children,
       ),
     );
   }

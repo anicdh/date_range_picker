@@ -17,7 +17,7 @@ Flutter date range pickers use a dialog window to select a range of date on mobi
 Add to `pubspec.yaml` in `dependencies` 
 
 ```
-  date_range_picker: ^1.0.2
+  date_range_picker: ^1.0.3
 ```
 
 ### Usage
