@@ -2,3 +2,4 @@
 ## [1.0.1] - Format code
 ## [1.0.2] - Fixed two run time exceptions
 ## [1.0.3] - Fix landscape mode
+## [1.0.4] - Don't add date to array if date is null
