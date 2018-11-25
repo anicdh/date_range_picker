@@ -1104,7 +1104,14 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
   }
 
   void _handleOk() {
-    Navigator.pop(context, [_selectedFirstDate, _selectedLastDate]);
+    final result = [];
+    if (_selectedFirstDate != null) {
+      result.add(_selectedFirstDate);
+      if (_selectedLastDate != null) {
+        result.add(_selectedLastDate);
+      }
+    }
+    Navigator.pop(context, result);
   }
 
   Widget _buildPicker() {
