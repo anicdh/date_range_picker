@@ -1104,7 +1104,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
   }
 
   void _handleOk() {
-    final result = [];
+    List<DateTime> result = [];
     if (_selectedFirstDate != null) {
       result.add(_selectedFirstDate);
       if (_selectedLastDate != null) {
