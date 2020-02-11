@@ -32,7 +32,7 @@ new MaterialButton(
           initialFirstDate: new DateTime.now(),
           initialLastDate: (new DateTime.now()).add(new Duration(days: 7)),
           firstDate: new DateTime(2015),
-          lastDate: new DateTime(2020)
+          lastDate: new DateTime(DateTime.now().year + 2)
       );
       if (picked != null && picked.length == 2) {
           print(picked);
