@@ -2,7 +2,9 @@
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square"/>
 </a> <a href="https://pub.dartlang.org/packages/date_range_picker"><img alt="pub version" src="https://img.shields.io/pub/v/date_range_picker.svg?style=flat-square"></a>
 
-# Date Range Picker
+# [Deprecated] Date Range Picker
+
+`Currently I'm too busy, I will comeback and update to adapt the latest version of Flutter in March. Thank all you guys!`
 
 Flutter date range pickers use a dialog window to select a range of date on mobile.
 
