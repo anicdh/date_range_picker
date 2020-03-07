@@ -24,12 +24,12 @@ Add to `pubspec.yaml` in `dependencies`
 
 ### Usage
 ```
-import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
+import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 ...
 new MaterialButton(
     color: Colors.deepOrangeAccent,
     onPressed: () async {
-      final List<DateTime> picked = await DateRagePicker.showDatePicker(
+      final List<DateTime> picked = await DateRangePicker.showDatePicker(
           context: context,
           initialFirstDate: new DateTime.now(),
           initialLastDate: (new DateTime.now()).add(new Duration(days: 7)),
