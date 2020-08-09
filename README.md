@@ -4,9 +4,8 @@
 
 # [Deprecated] Date Range Picker
 
-`Currently I'm too busy, I will comeback and update to adapt the latest version of Flutter in March. Thank all you guys!`
-
-Flutter date range pickers use a dialog window to select a range of date on mobile.
+Currently Flutter has supported date range picker, so I think my mission is done. Thanks for using my lib.
+Link: https://api.flutter.dev/flutter/material/showDateRangePicker.html
 
 ## Demo
 
