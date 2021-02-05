@@ -1149,7 +1149,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         child: _buildPicker(),
       ),
     );
-    final Widget actions = new ButtonTheme.bar(
+    final Widget actions = new ButtonBarTheme(
       child: new ButtonBar(
         children: <Widget>[
           new FlatButton(
