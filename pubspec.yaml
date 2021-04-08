@@ -19,7 +19,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#flutter:
-#  assets:
-#    - assets/ic_arrow_left.svg
-#    - assets/ic_arrow_right.svg
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
