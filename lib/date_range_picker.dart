@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:math' as math;
 
-import 'package:cryptowalletmobile/widgets/calendar/rainbow_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_date_pickers/src/date_period.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 // Color and setups
 const Color _selectedDayItemBackgroundColor = Color(0xFF6547AD);
@@ -82,7 +80,7 @@ class _DatePickerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MaterialLocalizations localizations =
-    MaterialLocalizations.of(context);
+        MaterialLocalizations.of(context);
     final ThemeData themeData = Theme.of(context);
     final TextTheme headerTextTheme = themeData.primaryTextTheme;
     Color dayColor;
@@ -91,7 +89,7 @@ class _DatePickerHeader extends StatelessWidget {
       case Brightness.light:
         dayColor = mode == DatePickerMode.day ? Colors.black87 : Colors.black54;
         yearColor =
-        mode == DatePickerMode.year ? Colors.black87 : Colors.black54;
+            mode == DatePickerMode.year ? Colors.black87 : Colors.black54;
         break;
       case Brightness.dark:
         dayColor = mode == DatePickerMode.day ? Colors.white : Colors.white70;
@@ -99,9 +97,9 @@ class _DatePickerHeader extends StatelessWidget {
         break;
     }
     final TextStyle dayStyle =
-    headerTextTheme.display1.copyWith(color: dayColor, height: 1.4);
+        headerTextTheme.display1.copyWith(color: dayColor, height: 1.4);
     final TextStyle yearStyle =
-    headerTextTheme.subhead.copyWith(color: yearColor, height: 1.4);
+        headerTextTheme.subhead.copyWith(color: yearColor, height: 1.4);
 
     Color backgroundColor;
     switch (themeData.brightness) {
@@ -135,11 +133,11 @@ class _DatePickerHeader extends StatelessWidget {
         child: new _DateHeaderButton(
           color: backgroundColor,
           onTap: Feedback.wrapForTap(
-                  () => _handleChangeMode(DatePickerMode.year), context),
+              () => _handleChangeMode(DatePickerMode.year), context),
           child: new Semantics(
               selected: mode == DatePickerMode.year,
               child:
-              new Text(localizations.formatYear(date), style: yearStyle)),
+                  new Text(localizations.formatYear(date), style: yearStyle)),
         ),
       );
     }
@@ -151,7 +149,7 @@ class _DatePickerHeader extends StatelessWidget {
         child: new _DateHeaderButton(
           color: backgroundColor,
           onTap: Feedback.wrapForTap(
-                  () => _handleChangeMode(DatePickerMode.day), context),
+              () => _handleChangeMode(DatePickerMode.day), context),
           child: new Semantics(
               selected: mode == DatePickerMode.day,
               child: new Text(
@@ -172,12 +170,12 @@ class _DatePickerHeader extends StatelessWidget {
     );
     final Widget endHeader = selectedLastDate != null
         ? new Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        renderYearButton(selectedLastDate),
-        renderDayButton(selectedLastDate),
-      ],
-    )
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              renderYearButton(selectedLastDate),
+              renderDayButton(selectedLastDate),
+            ],
+          )
         : new Container();
 
     return new Container(
@@ -187,21 +185,21 @@ class _DatePickerHeader extends StatelessWidget {
       color: backgroundColor,
       child: orientation == Orientation.portrait
           ? new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [startHeader, endHeader],
-      )
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [startHeader, endHeader],
+            )
           : new Column(
-        children: [
-          new Container(
-            width: width,
-            child: startHeader,
-          ),
-          new Container(
-            width: width,
-            child: endHeader,
-          ),
-        ],
-      ),
+              children: [
+                new Container(
+                  width: width,
+                  child: startHeader,
+                ),
+                new Container(
+                  width: width,
+                  child: endHeader,
+                ),
+              ],
+            ),
     );
   }
 }
@@ -438,12 +436,12 @@ class DayPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final MaterialLocalizations localizations =
-    MaterialLocalizations.of(context);
+        MaterialLocalizations.of(context);
     final int year = displayedMonth.year;
     final int month = displayedMonth.month;
     final int daysInMonth = getDaysInMonth(year, month);
     final int firstDayOffset =
-    _computeFirstDayOffset(year, month, localizations);
+        _computeFirstDayOffset(year, month, localizations);
     final List<Widget> labels = <Widget>[];
     labels.addAll(_getDayHeaders(
         themeData.textTheme.caption.copyWith(
@@ -462,11 +460,11 @@ class DayPicker extends StatelessWidget {
       // developer.log('i: $i');
       if (day > daysInMonth) break;
       bool isFirstDay = false;
-      if(day == 1) {
+      if (day == 1) {
         isFirstDay = true;
       }
       bool isLastDay = false;
-      if(day == daysInMonth) {
+      if (day == daysInMonth) {
         isLastDay = true;
       }
       bool isFirstFromLeftSide = false;
@@ -498,12 +496,12 @@ class DayPicker extends StatelessWidget {
             selectedFirstDate.day == day;
         final bool isSelectedLastDay = selectedLastDate != null
             ? (selectedLastDate.year == year &&
-            selectedLastDate.month == month &&
-            selectedLastDate.day == day)
+                selectedLastDate.month == month &&
+                selectedLastDate.day == day)
             : null;
         final bool isInRange = selectedLastDate != null
             ? (dayToBuild.isBefore(selectedLastDate) &&
-            dayToBuild.isAfter(selectedFirstDate))
+                dayToBuild.isAfter(selectedFirstDate))
             : null;
 
         if (isSelectedFirstDay &&
@@ -522,17 +520,17 @@ class DayPicker extends StatelessWidget {
               fontFamily: "TTChocolatesMedium",
               fontSize: 16,
               color: _selectedDayTextColor);
-          if(isFirstDay && isLastFromRightSide || isLastDay) {
+          if (isFirstDay && isLastFromRightSide || isLastDay) {
           } else {
             decoration = new BoxDecoration(
                 gradient: RainbowGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: <Color>[
-                    _calendarBackgroundColor,
-                    _rangeItemsBackgroundColor
-                  ],
-                ));
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                _calendarBackgroundColor,
+                _rangeItemsBackgroundColor
+              ],
+            ));
           }
           circleBackgroundColor = _selectedDayItemBackgroundColor;
         } else if (isSelectedLastDay != null && isSelectedLastDay) {
@@ -541,17 +539,17 @@ class DayPicker extends StatelessWidget {
               fontFamily: "TTChocolatesMedium",
               fontSize: 16,
               color: _selectedDayTextColor);
-          if(isLastDay && isFirstFromLeftSide || isFirstDay) {
+          if (isLastDay && isFirstFromLeftSide || isFirstDay) {
           } else {
             decoration = new BoxDecoration(
                 gradient: RainbowGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: <Color>[
-                    _rangeItemsBackgroundColor,
-                    _calendarBackgroundColor
-                  ],
-                ));
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                _rangeItemsBackgroundColor,
+                _calendarBackgroundColor
+              ],
+            ));
           }
           circleBackgroundColor = _selectedDayItemBackgroundColor;
         } else if (isInRange != null && isInRange) {
@@ -574,7 +572,7 @@ class DayPicker extends StatelessWidget {
             decoration = new BoxDecoration(
                 color: _rangeItemsBackgroundColor, shape: BoxShape.rectangle);
           }
-          if(isFirstDay) {
+          if (isFirstDay) {
             decoration = new BoxDecoration(
                 color: _rangeItemsBackgroundColor,
                 borderRadius: BorderRadius.only(
@@ -582,7 +580,8 @@ class DayPicker extends StatelessWidget {
                   bottomLeft: new Radius.circular(50.0),
                 ));
           }
-          if(isFirstFromLeftSide && isLastDay || isLastFromRightSide && isFirstDay) {
+          if (isFirstFromLeftSide && isLastDay ||
+              isLastFromRightSide && isFirstDay) {
             decoration = new BoxDecoration(
                 color: _rangeItemsBackgroundColor,
                 borderRadius: BorderRadius.only(
@@ -596,8 +595,7 @@ class DayPicker extends StatelessWidget {
                 color: _rangeItemsBackgroundColor,
                 borderRadius: BorderRadius.only(
                     topRight: new Radius.circular(50.0),
-                    bottomRight: new Radius.circular(50.0)
-                ));
+                    bottomRight: new Radius.circular(50.0)));
           }
         } else if (disabled) {
           itemStyle = themeData.textTheme.body1.copyWith(
@@ -630,7 +628,7 @@ class DayPicker extends StatelessWidget {
                 // for the day of month. To do that we prepend day of month to the
                 // formatted full date.
                 label:
-                '${localizations.formatDecimal(day)}, ${localizations.formatFullDate(dayToBuild)}',
+                    '${localizations.formatDecimal(day)}, ${localizations.formatFullDate(dayToBuild)}',
                 selected: isSelectedFirstDay ||
                     isSelectedLastDay != null && isSelectedLastDay,
                 child: new Container(
@@ -693,8 +691,7 @@ class DayPicker extends StatelessWidget {
             child: new GridView.custom(
                 gridDelegate: _kDayPickerGridDelegate,
                 childrenDelegate: new SliverChildListDelegate(labels,
-                    addRepaintBoundaries: false)
-            ),
+                    addRepaintBoundaries: false)),
           ),
         ],
       ),
@@ -779,9 +776,9 @@ class _MonthPickerState extends State<MonthPicker>
         duration: const Duration(milliseconds: 250), vsync: this);
     _chevronOpacityAnimation =
         new Tween<double>(begin: 1.0, end: 0.0).animate(new CurvedAnimation(
-          parent: _chevronOpacityController,
-          curve: Curves.easeInOut,
-        ));
+      parent: _chevronOpacityController,
+      curve: Curves.easeInOut,
+    ));
   }
 
   @override
@@ -789,13 +786,13 @@ class _MonthPickerState extends State<MonthPicker>
     super.didUpdateWidget(oldWidget);
     if (widget.selectedLastDate == null) {
       final int monthPage =
-      _monthDelta(widget.firstDate, widget.selectedFirstDate);
+          _monthDelta(widget.firstDate, widget.selectedFirstDate);
       _dayPickerController = new PageController(initialPage: monthPage);
       _handleMonthPageChanged(monthPage);
     } else if (oldWidget.selectedLastDate == null ||
         widget.selectedLastDate != oldWidget.selectedLastDate) {
       final int monthPage =
-      _monthDelta(widget.firstDate, widget.selectedLastDate);
+          _monthDelta(widget.firstDate, widget.selectedLastDate);
       _dayPickerController = new PageController(initialPage: monthPage);
       _handleMonthPageChanged(monthPage);
     }
@@ -821,10 +818,10 @@ class _MonthPickerState extends State<MonthPicker>
   void _updateCurrentDate() {
     _todayDate = new DateTime.now();
     final DateTime tomorrow =
-    new DateTime(_todayDate.year, _todayDate.month, _todayDate.day + 1);
+        new DateTime(_todayDate.year, _todayDate.month, _todayDate.day + 1);
     Duration timeUntilTomorrow = tomorrow.difference(_todayDate);
     timeUntilTomorrow +=
-    const Duration(seconds: 1); // so we don't miss it by rounding
+        const Duration(seconds: 1); // so we don't miss it by rounding
     _timer?.cancel();
     _timer = new Timer(timeUntilTomorrow, () {
       setState(() {
@@ -949,7 +946,7 @@ class _MonthPickerState extends State<MonthPicker>
                       ? null
                       : '${localizations.previousMonthTooltip} ${localizations.formatMonthYear(_previousMonthDate)}',
                   onPressed:
-                  _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
               ),
             ),
@@ -963,7 +960,7 @@ class _MonthPickerState extends State<MonthPicker>
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
                   icon:
-                  SvgPicture.asset('assets/images_svg/ic_arrow_right.svg'),
+                      SvgPicture.asset('assets/images_svg/ic_arrow_right.svg'),
                   tooltip: _isDisplayingLastMonth
                       ? null
                       : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
@@ -1080,7 +1077,7 @@ class _YearPickerState extends State<YearPicker> {
                 year == widget.selectedLastDate.year);
         final TextStyle itemStyle = isSelected
             ? themeData.textTheme.headline
-            .copyWith(color: themeData.accentColor)
+                .copyWith(color: themeData.accentColor)
             : style;
         return new InkWell(
           key: new ValueKey<int>(year),
@@ -1225,11 +1222,11 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       _selectedFirstDate = changes[0];
       _selectedLastDate = changes[1];
       DateTime firstDate = _selectedFirstDate;
-      if(firstDate == null) {
+      if (firstDate == null) {
         firstDate = _selectedLastDate;
       }
       DateTime lastDate = _selectedLastDate;
-      if(lastDate == null) {
+      if (lastDate == null) {
         lastDate = _selectedFirstDate;
       }
       developer.log('firstDate: $firstDate, lastDate: $lastDate');
@@ -1303,71 +1300,71 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     );
     final Dialog dialog = new Dialog(child: new OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
-          assert(orientation != null);
-          Widget header;
-          if (_isHeaderShow) {
-            header = new _DatePickerHeader(
-              selectedFirstDate: _selectedFirstDate,
-              selectedLastDate: _selectedLastDate,
-              mode: _mode,
-              onModeChanged: _handleModeChanged,
-              orientation: orientation,
-            );
-          } else {
-            header = new Container(width: 0.0, height: 0.0);
-          }
-          switch (orientation) {
-            case Orientation.portrait:
-              return new SizedBox(
-                width: _kMonthPickerPortraitWidth,
-                child: new Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    new Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _calendarBackgroundColor),
-                      child: new Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          new Container(height: _monthNamePaddingTopBottom),
-                          picker,
-                          new Container(height: _monthNamePaddingTopBottom),
-                          // actions, - Not need Acton btn in this flow
-                        ],
-                      ),
-                    ),
-                  ],
+      assert(orientation != null);
+      Widget header;
+      if (_isHeaderShow) {
+        header = new _DatePickerHeader(
+          selectedFirstDate: _selectedFirstDate,
+          selectedLastDate: _selectedLastDate,
+          mode: _mode,
+          onModeChanged: _handleModeChanged,
+          orientation: orientation,
+        );
+      } else {
+        header = new Container(width: 0.0, height: 0.0);
+      }
+      switch (orientation) {
+        case Orientation.portrait:
+          return new SizedBox(
+            width: _kMonthPickerPortraitWidth,
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                header,
+                new Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: _calendarBackgroundColor),
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      new Container(height: _monthNamePaddingTopBottom),
+                      picker,
+                      new Container(height: _monthNamePaddingTopBottom),
+                      // actions, - Not need Acton btn in this flow
+                    ],
+                  ),
                 ),
-              );
-            case Orientation.landscape:
-              return new SizedBox(
-                height: _kDatePickerLandscapeHeight,
-                child: new Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    new Flexible(
-                      child: new Container(
-                        width: _kMonthPickerLandscapeWidth,
-                        color: theme.dialogBackgroundColor,
-                        child: new Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[picker, actions],
-                        ),
-                      ),
+              ],
+            ),
+          );
+        case Orientation.landscape:
+          return new SizedBox(
+            height: _kDatePickerLandscapeHeight,
+            child: new Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                header,
+                new Flexible(
+                  child: new Container(
+                    width: _kMonthPickerLandscapeWidth,
+                    color: theme.dialogBackgroundColor,
+                    child: new Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[picker, actions],
                     ),
-                  ],
+                  ),
                 ),
-              );
-          }
-          return null;
-        }));
+              ],
+            ),
+          );
+      }
+      return null;
+    }));
 
     return new Theme(
       data: theme.copyWith(
@@ -1423,20 +1420,20 @@ Future<List<DateTime>> showDatePicker({
   TextDirection textDirection,
 }) async {
   assert(!initialFirstDate.isBefore(firstDate),
-  'initialDate must be on or after firstDate');
+      'initialDate must be on or after firstDate');
   assert(!initialLastDate.isAfter(lastDate),
-  'initialDate must be on or before lastDate');
+      'initialDate must be on or before lastDate');
   assert(!initialFirstDate.isAfter(initialLastDate),
-  'initialFirstDate must be on or before initialLastDate');
+      'initialFirstDate must be on or before initialLastDate');
   assert(
-  !firstDate.isAfter(lastDate), 'lastDate must be on or after firstDate');
+      !firstDate.isAfter(lastDate), 'lastDate must be on or after firstDate');
   assert(
-  selectableDayPredicate == null ||
-      selectableDayPredicate(initialFirstDate) ||
-      selectableDayPredicate(initialLastDate),
-  'Provided initialDate must satisfy provided selectableDayPredicate');
+      selectableDayPredicate == null ||
+          selectableDayPredicate(initialFirstDate) ||
+          selectableDayPredicate(initialLastDate),
+      'Provided initialDate must satisfy provided selectableDayPredicate');
   assert(
-  initialDatePickerMode != null, 'initialDatePickerMode must not be null');
+      initialDatePickerMode != null, 'initialDatePickerMode must not be null');
 
   Widget child = new _DatePickerDialog(
     initialFirstDate: initialFirstDate,
@@ -1468,33 +1465,32 @@ Future<List<DateTime>> showDatePicker({
   );
 }
 
-Widget getDatePicker({
-  @required BuildContext context,
-  @required DateTime initialFirstDate,
-  @required DateTime initialLastDate,
-  @required DateTime firstDate,
-  @required DateTime lastDate,
-  SelectableDayPredicate selectableDayPredicate,
-  DatePickerMode initialDatePickerMode = DatePickerMode.day,
-  Locale locale,
-  TextDirection textDirection,
-  Function cb
-}) {
+Widget getDatePicker(
+    {@required BuildContext context,
+    @required DateTime initialFirstDate,
+    @required DateTime initialLastDate,
+    @required DateTime firstDate,
+    @required DateTime lastDate,
+    SelectableDayPredicate selectableDayPredicate,
+    DatePickerMode initialDatePickerMode = DatePickerMode.day,
+    Locale locale,
+    TextDirection textDirection,
+    Function cb}) {
   assert(!initialFirstDate.isBefore(firstDate),
-  'initialDate must be on or after firstDate');
+      'initialDate must be on or after firstDate');
   assert(!initialLastDate.isAfter(lastDate),
-  'initialDate must be on or before lastDate');
+      'initialDate must be on or before lastDate');
   assert(!initialFirstDate.isAfter(initialLastDate),
-  'initialFirstDate must be on or before initialLastDate');
+      'initialFirstDate must be on or before initialLastDate');
   assert(
-  !firstDate.isAfter(lastDate), 'lastDate must be on or after firstDate');
+      !firstDate.isAfter(lastDate), 'lastDate must be on or after firstDate');
   assert(
-  selectableDayPredicate == null ||
-      selectableDayPredicate(initialFirstDate) ||
-      selectableDayPredicate(initialLastDate),
-  'Provided initialDate must satisfy provided selectableDayPredicate');
+      selectableDayPredicate == null ||
+          selectableDayPredicate(initialFirstDate) ||
+          selectableDayPredicate(initialLastDate),
+      'Provided initialDate must satisfy provided selectableDayPredicate');
   assert(
-  initialDatePickerMode != null, 'initialDatePickerMode must not be null');
+      initialDatePickerMode != null, 'initialDatePickerMode must not be null');
 
   Widget child = new _DatePickerDialog(
       initialFirstDate: initialFirstDate,
@@ -1521,4 +1517,33 @@ Widget getDatePicker({
   }
 
   return child;
+}
+
+class RainbowGradient extends LinearGradient {
+  RainbowGradient({
+    @required List<Color> colors,
+    AlignmentGeometry begin = Alignment.topLeft,
+    AlignmentGeometry end = Alignment.topRight,
+  }) : super(
+          begin: begin,
+          end: end,
+          colors: _buildColors(colors),
+          stops: _buildStops(colors),
+        );
+
+  static List<Color> _buildColors(List<Color> colors) {
+    return colors.fold<List<Color>>(<Color>[],
+        (List<Color> list, Color color) => list..addAll(<Color>[color, color]));
+  }
+
+  static List<double> _buildStops(List<Color> colors) {
+    final List<double> stops = <double>[0.0];
+
+    for (int i = 1, len = colors.length; i < len; i++) {
+      stops.add(i / colors.length);
+      stops.add(i / colors.length);
+    }
+
+    return stops..add(1.0);
+  }
 }
