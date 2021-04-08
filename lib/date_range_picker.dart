@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_date_pickers/src/date_period.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // Color and setups
 const Color _selectedDayItemBackgroundColor = Color(0xFF6547AD);

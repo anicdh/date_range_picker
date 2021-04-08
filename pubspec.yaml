@@ -13,6 +13,7 @@ dependencies:
   flutter_date_pickers:
     git:
       url: https://github.com/defint/flutter_date_pickers
+  flutter_svg: ^0.19.1
 
 dev_dependencies:
   flutter_test:
