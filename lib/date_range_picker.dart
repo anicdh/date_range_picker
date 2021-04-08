@@ -961,7 +961,7 @@ class _MonthPickerState extends State<MonthPicker>
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
                   icon:
-                      SvgPicture.asset('assets/ic_arrow_right.svg'),
+                      SvgPicture.asset("assets/ic_arrow_right.svg"),
                   tooltip: _isDisplayingLastMonth
                       ? null
                       : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
