@@ -20,7 +20,6 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: true
-
   assets:
-    - assets/images_svg/
+    - assets/ic_arrow_left.svg
+    - assets/ic_arrow_right.svg
