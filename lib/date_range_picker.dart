@@ -280,19 +280,19 @@ class DayPicker extends StatelessWidget {
   /// Creates a day picker.
   ///
   /// Rarely used directly. Instead, typically used as part of a [MonthPicker].
-  DayPicker(
-      {Key key,
-      @required this.selectedFirstDate,
-      this.selectedLastDate,
-      @required this.currentDate,
-      @required this.onChanged,
-      @required this.firstDate,
-      @required this.lastDate,
-      @required this.displayedMonth,
-      this.selectableDayPredicate,
-      this.icArrowLeftPath,
-      this.icArrowRightPath})
-      : assert(selectedFirstDate != null),
+  DayPicker({
+    Key key,
+    @required this.selectedFirstDate,
+    this.selectedLastDate,
+    @required this.currentDate,
+    @required this.onChanged,
+    @required this.firstDate,
+    @required this.lastDate,
+    @required this.displayedMonth,
+    this.selectableDayPredicate,
+    this.icArrowLeftPath,
+    this.icArrowRightPath
+  })  : assert(selectedFirstDate != null),
         assert(currentDate != null),
         assert(onChanged != null),
         assert(displayedMonth != null),
@@ -722,17 +722,17 @@ class MonthPicker extends StatefulWidget {
   ///
   /// Rarely used directly. Instead, typically used as part of the dialog shown
   /// by [showDatePicker].
-  MonthPicker(
-      {Key key,
-      @required this.selectedFirstDate,
-      this.selectedLastDate,
-      @required this.onChanged,
-      @required this.firstDate,
-      @required this.lastDate,
-      this.selectableDayPredicate,
-      this.icArrowLeftPath,
-      this.icArrowRightPath})
-      : assert(selectedFirstDate != null),
+  MonthPicker({
+    Key key,
+    @required this.selectedFirstDate,
+    this.selectedLastDate,
+    @required this.onChanged,
+    @required this.firstDate,
+    @required this.lastDate,
+    this.selectableDayPredicate,
+    this.icArrowLeftPath,
+    this.icArrowRightPath
+  })  : assert(selectedFirstDate != null),
         assert(onChanged != null),
         assert(!firstDate.isAfter(lastDate)),
         assert(!selectedFirstDate.isBefore(firstDate) &&
@@ -972,7 +972,8 @@ class _MonthPickerState extends State<MonthPicker>
               child: new FadeTransition(
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
-                  icon: SvgPicture.asset(widget.icArrowRightPath),
+                  icon:
+                      SvgPicture.asset(widget.icArrowRightPath),
                   tooltip: _isDisplayingLastMonth
                       ? null
                       : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
@@ -1121,18 +1122,18 @@ class _YearPickerState extends State<YearPicker> {
 }
 
 class _DatePickerDialog extends StatefulWidget {
-  const _DatePickerDialog(
-      {Key key,
-      this.initialFirstDate,
-      this.initialLastDate,
-      this.firstDate,
-      this.lastDate,
-      this.selectableDayPredicate,
-      this.initialDatePickerMode,
-      this.cb,
-      this.icArrowRightPath,
-      this.icArrowLeftPath})
-      : super(key: key);
+  const _DatePickerDialog({
+    Key key,
+    this.initialFirstDate,
+    this.initialLastDate,
+    this.firstDate,
+    this.lastDate,
+    this.selectableDayPredicate,
+    this.initialDatePickerMode,
+    this.cb,
+    this.icArrowRightPath,
+    this.icArrowLeftPath
+  }) : super(key: key);
 
   final DateTime initialFirstDate;
   final DateTime initialLastDate;
@@ -1270,13 +1271,16 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     switch (_mode) {
       case DatePickerMode.day:
         return new MonthPicker(
-            key: _pickerKey,
-            selectedFirstDate: _selectedFirstDate,
-            selectedLastDate: _selectedLastDate,
-            onChanged: _handleDayChanged,
-            firstDate: widget.firstDate,
-            lastDate: widget.lastDate,
-            selectableDayPredicate: widget.selectableDayPredicate);
+          key: _pickerKey,
+          selectedFirstDate: _selectedFirstDate,
+          selectedLastDate: _selectedLastDate,
+          onChanged: _handleDayChanged,
+          firstDate: widget.firstDate,
+          lastDate: widget.lastDate,
+          selectableDayPredicate: widget.selectableDayPredicate,
+            icArrowRightPath: icArrowRightPath,
+            icArrowLeftPath: icArrowLeftPath
+        );
       case DatePickerMode.year:
         return new YearPicker(
           key: _pickerKey,
@@ -1423,18 +1427,19 @@ typedef bool SelectableDayPredicate(DateTime day);
 ///
 ///  * [showTimePicker]
 ///  * <https://material.google.com/components/pickers.html#pickers-date-pickers>
-Future<List<DateTime>> showDatePicker(
-    {@required BuildContext context,
-    @required DateTime initialFirstDate,
-    @required DateTime initialLastDate,
-    @required DateTime firstDate,
-    @required DateTime lastDate,
-    SelectableDayPredicate selectableDayPredicate,
-    DatePickerMode initialDatePickerMode = DatePickerMode.day,
-    Locale locale,
-    TextDirection textDirection,
-    String icArrowRightPath,
-    String icArrowLeftPath}) async {
+Future<List<DateTime>> showDatePicker({
+  @required BuildContext context,
+  @required DateTime initialFirstDate,
+  @required DateTime initialLastDate,
+  @required DateTime firstDate,
+  @required DateTime lastDate,
+  SelectableDayPredicate selectableDayPredicate,
+  DatePickerMode initialDatePickerMode = DatePickerMode.day,
+  Locale locale,
+  TextDirection textDirection,
+  String icArrowRightPath,
+  String icArrowLeftPath
+}) async {
   assert(!initialFirstDate.isBefore(firstDate),
       'initialDate must be on or after firstDate');
   assert(!initialLastDate.isAfter(lastDate),
