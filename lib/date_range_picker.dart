@@ -725,6 +725,8 @@ class MonthPicker extends StatefulWidget {
     @required this.firstDate,
     @required this.lastDate,
     this.selectableDayPredicate,
+    this.icArrowLeftPath,
+    this.icArrowRightPath,
   })  : assert(selectedFirstDate != null),
         assert(onChanged != null),
         assert(!firstDate.isAfter(lastDate)),
@@ -751,6 +753,9 @@ class MonthPicker extends StatefulWidget {
 
   /// Optional user supplied predicate function to customize selectable days.
   final SelectableDayPredicate selectableDayPredicate;
+
+  final String icArrowLeftPath;
+  final String icArrowRightPath;
 
   @override
   _MonthPickerState createState() => new _MonthPickerState();
@@ -903,6 +908,7 @@ class _MonthPickerState extends State<MonthPicker>
 
   @override
   Widget build(BuildContext context) {
+    developer.log('icArrowLeftPath: ${widget.icArrowLeftPath}');
     return new SizedBox(
       width: _kMonthPickerPortraitWidth,
       height: _kMaxDayPickerHeight,
@@ -942,7 +948,7 @@ class _MonthPickerState extends State<MonthPicker>
               child: new FadeTransition(
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
-                  icon: SvgPicture.asset('lib/assets/ic_arrow_left.svg'),
+                  icon: SvgPicture.asset(widget.icArrowLeftPath),
                   tooltip: _isDisplayingFirstMonth
                       ? null
                       : '${localizations.previousMonthTooltip} ${localizations.formatMonthYear(_previousMonthDate)}',
@@ -1119,6 +1125,8 @@ class _DatePickerDialog extends StatefulWidget {
     this.selectableDayPredicate,
     this.initialDatePickerMode,
     this.cb,
+    this.icArrowLeftPath,
+    this.icArrowRightPath,
   }) : super(key: key);
 
   final DateTime initialFirstDate;
@@ -1128,6 +1136,8 @@ class _DatePickerDialog extends StatefulWidget {
   final SelectableDayPredicate selectableDayPredicate;
   final DatePickerMode initialDatePickerMode;
   final Function cb;
+  final String icArrowLeftPath;
+  final String icArrowRightPath;
 
   @override
   _DatePickerDialogState createState() => new _DatePickerDialogState();
@@ -1262,6 +1272,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           firstDate: widget.firstDate,
           lastDate: widget.lastDate,
           selectableDayPredicate: widget.selectableDayPredicate,
+          icArrowLeftPath: widget.icArrowLeftPath,
+          icArrowRightPath: widget.icArrowRightPath
         );
       case DatePickerMode.year:
         return new YearPicker(
@@ -1419,6 +1431,8 @@ Future<List<DateTime>> showDatePicker({
   DatePickerMode initialDatePickerMode = DatePickerMode.day,
   Locale locale,
   TextDirection textDirection,
+  String icArrowLeftPath,
+  String icArrowRightPath
 }) async {
   assert(!initialFirstDate.isBefore(firstDate),
   'initialDate must be on or after firstDate');
@@ -1437,13 +1451,14 @@ Future<List<DateTime>> showDatePicker({
   initialDatePickerMode != null, 'initialDatePickerMode must not be null');
 
   Widget child = new _DatePickerDialog(
-    initialFirstDate: initialFirstDate,
-    initialLastDate: initialLastDate,
-    firstDate: firstDate,
-    lastDate: lastDate,
-    selectableDayPredicate: selectableDayPredicate,
-    initialDatePickerMode: initialDatePickerMode,
-  );
+      initialFirstDate: initialFirstDate,
+      initialLastDate: initialLastDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      selectableDayPredicate: selectableDayPredicate,
+      initialDatePickerMode: initialDatePickerMode,
+      icArrowLeftPath: icArrowLeftPath,
+      icArrowRightPath: icArrowRightPath);
 
   if (textDirection != null) {
     child = new Directionality(
