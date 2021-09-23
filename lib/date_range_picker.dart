@@ -8,6 +8,8 @@ library date_range_picker;
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// forked by AmSn6. replaced deprecated text theme on 23-09-2021
+
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -93,9 +95,9 @@ class _DatePickerHeader extends StatelessWidget {
         break;
     }
     final TextStyle dayStyle =
-        headerTextTheme.display1!.copyWith(color: dayColor, height: 1.4);
+        headerTextTheme.headline4!.copyWith(color: dayColor, height: 1.4);
     final TextStyle yearStyle =
-        headerTextTheme.subhead!.copyWith(color: yearColor, height: 1.4);
+        headerTextTheme.subtitle1!.copyWith(color: yearColor, height: 1.4);
 
     Color? backgroundColor;
     switch (themeData.brightness) {
@@ -452,7 +454,7 @@ class DayPicker extends StatelessWidget {
             (selectableDayPredicate != null &&
                 !selectableDayPredicate!(dayToBuild));
         BoxDecoration? decoration;
-        TextStyle? itemStyle = themeData.textTheme.body1;
+        TextStyle? itemStyle = themeData.textTheme.bodyText2;
         final bool isSelectedFirstDay = selectedFirstDate.year == year &&
             selectedFirstDate.month == month &&
             selectedFirstDate.day == day;
@@ -467,39 +469,39 @@ class DayPicker extends StatelessWidget {
             : null;
         if (isSelectedFirstDay &&
             (isSelectedLastDay == null || isSelectedLastDay)) {
-          itemStyle = themeData.accentTextTheme.body2;
+          itemStyle = themeData.textTheme.bodyText1;
           decoration = new BoxDecoration(
-              color: themeData.accentColor, shape: BoxShape.circle);
+              color: themeData.primaryColor, shape: BoxShape.circle);
         } else if (isSelectedFirstDay) {
           // The selected day gets a circle background highlight, and a contrasting text color.
-          itemStyle = themeData.accentTextTheme.body2;
+          itemStyle = themeData.textTheme.bodyText1;
           decoration = new BoxDecoration(
-              color: themeData.accentColor,
+              color: themeData.primaryColor,
               borderRadius: BorderRadius.only(
                 topLeft: new Radius.circular(50.0),
                 bottomLeft: new Radius.circular(50.0),
               ));
         } else if (isSelectedLastDay != null && isSelectedLastDay) {
-          itemStyle = themeData.accentTextTheme.body2;
+          itemStyle = themeData.textTheme.bodyText1;
           decoration = new BoxDecoration(
-              color: themeData.accentColor,
+              color: themeData.primaryColor,
               borderRadius: BorderRadius.only(
                 topRight: new Radius.circular(50.0),
                 bottomRight: new Radius.circular(50.0),
               ));
         } else if (isInRange != null && isInRange) {
           decoration = new BoxDecoration(
-              color: themeData.accentColor.withOpacity(0.1),
+              color: themeData.primaryColor.withOpacity(0.1),
               shape: BoxShape.rectangle);
         } else if (disabled) {
-          itemStyle = themeData.textTheme.body1!
+          itemStyle = themeData.textTheme.bodyText2!
               .copyWith(color: themeData.disabledColor);
         } else if (currentDate.year == year &&
             currentDate.month == month &&
             currentDate.day == day) {
           // The current day gets a different text color.
           itemStyle =
-              themeData.textTheme.body2!.copyWith(color: themeData.accentColor);
+              themeData.textTheme.bodyText1!.copyWith(color: themeData.primaryColor);
         }
 
         Widget dayWidget = new Container(
@@ -561,7 +563,7 @@ class DayPicker extends StatelessWidget {
               child: new ExcludeSemantics(
                 child: new Text(
                   localizations.formatMonthYear(displayedMonth),
-                  style: themeData.textTheme.subhead,
+                  style: themeData.textTheme.subtitle1,
                 ),
               ),
             ),
@@ -941,7 +943,7 @@ class _YearPickerState extends State<YearPicker> {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     final ThemeData themeData = Theme.of(context);
-    final TextStyle? style = themeData.textTheme.body1;
+    final TextStyle? style = themeData.textTheme.bodyText2;
     return new ListView.builder(
       controller: scrollController,
       itemExtent: _itemExtent,
@@ -952,7 +954,7 @@ class _YearPickerState extends State<YearPicker> {
             (widget.selectedLastDate != null &&
                 year == widget.selectedLastDate!.year);
         final TextStyle? itemStyle = isSelected
-            ? themeData.textTheme.headline!
+            ? themeData.textTheme.headline5!
                 .copyWith(color: themeData.accentColor)
             : style;
         return new InkWell(
